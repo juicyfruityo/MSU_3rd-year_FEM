@@ -82,6 +82,13 @@ void assembly_one_matrix(element &elem, float *Matrix, float *Mlocal) {
   }
 }
 
+void assembly_force_matrix(element &elem, float *Matrix, float *Mlocal) {
+  for (int i=1; i<=8; ++i) {
+      int I = elem.num[std::round((i-1)/2) + 0]*2 - i%2;
+      Matrix[(I-1)*64] += Mlocal[(i-1)*8];
+  }
+}
+
 // Делаю B и  B_t
 void make_grad_matrix(element &elem, float *B, float *B_t, float xi, float eta) {
   float dxdxi = (-1.0/2) * (1-eta)/2 * elem._node[0].x

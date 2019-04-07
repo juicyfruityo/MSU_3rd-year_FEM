@@ -37,9 +37,23 @@ int main() {
       }
   }
 
+  float *ForceMatrix = new float[64];
+  float *Floc = new float[8];
+  for (int i=0; i<64; ++i)
+      ForceMatrix[i] = 0;
 
-  delete[] Mloc, Kloc;
-  delete[] MasMatrix, StifMatrix;
+  for (int i=0; i<Elements.size(); ++i) {
+      mass_matrix_local(Elements[i], Floc);
+      assembly_force_matrix(Elements[i], ForceMatrix, Floc);
+
+      for(int j=0; j<8; ++j) {
+          Floc[i] = 0;
+      }
+  }
+
+
+  delete[] Mloc, Kloc, Floc;
+  delete[] MasMatrix, StifMatrix, ForceMatrix;
 
 
 
