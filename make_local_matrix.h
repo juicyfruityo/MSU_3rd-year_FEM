@@ -214,7 +214,7 @@ void force_matrix_local(element &elem, float *Flocal, float f) {
                   * quad_w[k] * quad_w[l];
           }
       }
-      Floc[i] = tmp * ro;
+      Flocal[i] = tmp * ro;
   }
 }
 

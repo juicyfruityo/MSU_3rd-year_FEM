@@ -29,7 +29,7 @@ int main() {
       StifMatrix[i] = 0;
 
   for (int i=0; i<Elements.size(); ++i) {
-      mass_matrix_local(Elements[i], Kloc);
+      stiffness_matrix_local(Elements[i], Kloc);
       assembly_one_matrix(Elements[i], StifMatrix, Kloc);
 
       for(int j=0; j<64; ++j) {
@@ -44,7 +44,7 @@ int main() {
       ForceMatrix[i] = 0;
 
   for (int i=0; i<Elements.size(); ++i) {
-      mass_matrix_local(Elements[i], Floc, f);
+      force_matrix_local(Elements[i], Floc, f);
       assembly_force_matrix(Elements[i], ForceMatrix, Floc);
 
       for(int j=0; j<8; ++j) {
