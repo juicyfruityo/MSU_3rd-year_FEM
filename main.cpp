@@ -39,11 +39,12 @@ int main() {
 
   float *ForceMatrix = new float[64];
   float *Floc = new float[8];
+  float f = 1; // something like f(t)
   for (int i=0; i<64; ++i)
       ForceMatrix[i] = 0;
 
   for (int i=0; i<Elements.size(); ++i) {
-      mass_matrix_local(Elements[i], Floc);
+      mass_matrix_local(Elements[i], Floc, f);
       assembly_force_matrix(Elements[i], ForceMatrix, Floc);
 
       for(int j=0; j<8; ++j) {
