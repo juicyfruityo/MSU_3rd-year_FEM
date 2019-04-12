@@ -1,0 +1,60 @@
+﻿Построение начато 4/11/2019 8:26:51 PM.
+     1>Проект "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix\kursovaya_matrix.vcxproj" в узле 2 (целевые объекты build).
+     1>InitializeBuildStatus:
+         Создание "Debug\kursovaya_matrix.unsuccessfulbuild", так как было задано "AlwaysCreate".
+       AddCudaCompileDeps:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" /I. /FIcuda_runtime.h /c "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix\kernel.cu" 
+       AddCudaCompilePropsDeps:
+       Целевой объект "AddCudaCompilePropsDeps" пропускается, так как все выходные файлы актуальны по отношению к входным.
+       CudaBuild:
+         Compiling CUDA source file kernel.cu...
+         cmd.exe /C "C:\Users\ustinov\AppData\Local\Temp\7\tmp2b90869186df48c095bb8d2c6cac1f4c.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix\kernel.cu"
+         
+         C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2010 -ccbin "c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix\kernel.cu" 
+         kernel.cu
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\load_mesh.h(66): warning C4244: =: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\load_mesh.h(69): warning C4244: =: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(28): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(33): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(38): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(43): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(64): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(65): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(96): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(101): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(106): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(111): warning C4244: ?????????????: ?????????????? "double" ? "float", ???????? ?????? ??????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(178): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(179): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(216): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\make_local_matrix.h(217): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\main_program.h(18): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\main_program.h(32): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>c:\users\ustinov\documents\visual studio 2010\projects\kursovaya_matrix\kursovaya_matrix\main_program.h(47): warning C4018: <: ?????????????? ????? ?? ?????? ? ??? ?????
+     1>C:/Users/ustinov/Documents/Visual Studio 2010/Projects/kursovaya_matrix/kursovaya_matrix/kernel.cu(40): warning C4244: =: ?????????????? "float" ? "int", ???????? ?????? ??????
+     1>C:/Users/ustinov/Documents/Visual Studio 2010/Projects/kursovaya_matrix/kursovaya_matrix/kernel.cu(42): warning C4244: =: ?????????????? "int" ? "float", ???????? ?????? ??????
+     1>C:/Users/ustinov/Documents/Visual Studio 2010/Projects/kursovaya_matrix/kursovaya_matrix/kernel.cu(176): warning C4305: ?????????????: ???????? ?? "double" ? "float"
+     1>C:/Users/ustinov/Documents/Visual Studio 2010/Projects/kursovaya_matrix/kursovaya_matrix/kernel.cu(242): warning C4244: =: ?????????????? "int" ? "float", ???????? ?????? ??????
+     1>C:/Users/ustinov/Documents/Visual Studio 2010/Projects/kursovaya_matrix/kursovaya_matrix/kernel.cu(243): warning C4244: =: ?????????????? "int" ? "float", ???????? ?????? ??????
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\kursovaya_matrix.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\lib\Win32" cublas.lib cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\kursovaya_matrix.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\kursovaya_matrix.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\kursovaya_matrix.lib" /MACHINE:X86 Debug\kernel.cu.obj
+         kursovaya_matrix.vcxproj -> C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\kursovaya_matrix.exe
+       Manifest:
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\kursovaya_matrix.exe;#1" /manifest Debug\kursovaya_matrix.exe.intermediate.manifest
+       PostBuildEvent:
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart*.dll" "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart*.dll" "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\"
+         :VCEnd
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart*.dll" "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\Debug\"
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart32_65.dll
+         C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart64_65.dll
+                 2 file(s) copied.
+       FinalizeBuildStatus:
+         Файл "Debug\kursovaya_matrix.unsuccessfulbuild" удаляется.
+         Обращение к "Debug\kursovaya_matrix.lastbuildstate".
+     1>Построение проекта "C:\Users\ustinov\Documents\Visual Studio 2010\Projects\kursovaya_matrix\kursovaya_matrix\kursovaya_matrix.vcxproj" завершено (целевые объекты build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:08.57
