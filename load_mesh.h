@@ -48,8 +48,8 @@ int load_mesh() {
   // std::vector<node> Nodes;
   // std::vector<element> Elements;
   std::ifstream f_nodes, f_elements;
-  f_nodes.open("nodes_df_6x3.txt");
-  f_elements.open("elements_df_6x3.txt");
+  f_nodes.open("new_nodes_df_6x3.txt");
+  f_elements.open("new_elements_df_6x3.txt");
 
   int nid, eid, n1, n2, n3, n4;
   float x, y;

@@ -3,6 +3,7 @@
 
 #include "load_mesh.h"
 #include <cmath>
+#include <iostream>
 
 
 float basis_function(int num, float xi, float eta) {
@@ -72,20 +73,20 @@ void mass_matrix_local(element &elem, float *Mloc) {
   }
 }
 
-void assembly_one_matrix(element &elem, float *Matrix, float *Mlocal) {
+void assembly_one_matrix(element &elem, float *Matrix, float *Mlocal, int n_size) {
   for (int i=1; i<=8; ++i) {
       int I = elem.num[std::round((i-1)/2) + 0]*2 - i%2;
       for (int j=1; j<=8; ++j) {
           int J = elem.num[std::round((j-1)/2) + 0]*2 - j%2;
-          Matrix[(I-1)*64+(J-1)] += Mlocal[(i-1)*8+(j-1)];
+          Matrix[(I-1)*n_size+(J-1)] += Mlocal[(i-1)*8+(j-1)];
       }
   }
 }
 
-void assembly_force_matrix(element &elem, float *Matrix, float *Mlocal) {
+void assembly_force_matrix(element &elem, float *Matrix, float *Mlocal, int n_size) {
   for (int i=1; i<=8; ++i) {
       int I = elem.num[std::round((i-1)/2) + 0]*2 - i%2;
-      Matrix[(I-1)*64] += Mlocal[(i-1)*8];
+      Matrix[(I-1)] += Mlocal[(i-1)*8];
   }
 }
 
