@@ -3,7 +3,6 @@
 
 #include "load_mesh.h"
 #include <cmath>
-#include <iostream>
 
 
 float basis_function(int num, float xi, float eta) {
@@ -52,9 +51,11 @@ float Jacobian(element &elem, float xi, float eta) {
 }
 
 void mass_matrix_local(element &elem, float *Mloc) {
-  float ro = 1000;
-  std::vector<float> quad {-1, 1};
-  std::vector<float> quad_w {1, 1};
+  float ro = 10000;
+  std::vector<float> quad;
+  quad.push_back(-1); quad.push_back(1);
+  std::vector<float> quad_w;
+  quad_w.push_back(1); quad_w.push_back(1);
 
   for (int i=0; i<8; ++i) {
       for (int j=0; j<8; ++j) {
@@ -75,18 +76,30 @@ void mass_matrix_local(element &elem, float *Mloc) {
 
 void assembly_one_matrix(element &elem, float *Matrix, float *Mlocal, int n_size) {
   for (int i=1; i<=8; ++i) {
-      int I = elem.num[std::round((i-1)/2) + 0]*2 - i%2;
+      int I = elem.num[(int)((i-1)/2) + 0]*2 - i%2;
       for (int j=1; j<=8; ++j) {
-          int J = elem.num[std::round((j-1)/2) + 0]*2 - j%2;
+          int J = elem.num[(int)((j-1)/2) + 0]*2 - j%2;
           Matrix[(I-1)*n_size+(J-1)] += Mlocal[(i-1)*8+(j-1)];
       }
   }
 }
 
-void assembly_force_matrix(element &elem, float *Matrix, float *Mlocal, int n_size) {
+void assembly_mass_matrix(element &elem, float *Matrix, float *Mlocal, int n_size) {
   for (int i=1; i<=8; ++i) {
-      int I = elem.num[std::round((i-1)/2) + 0]*2 - i%2;
-      Matrix[(I-1)] += Mlocal[(i-1)*8];
+      int I = elem.num[(int)((i-1)/2) + 0]*2 - i%2;
+      for (int j=1; j<=8; ++j) {
+          int J = elem.num[(int)((j-1)/2) + 0]*2 - j%2;
+		  if (I == J) {
+				Matrix[(I-1)] += Mlocal[(i-1)*8+(j-1)];
+		  }
+      }
+  }
+}
+
+void assembly_force_matrix(element &elem, float *Matrix, float *Mlocal) {
+  for (int i=1; i<=8; ++i) {
+      int I = elem.num[(int)((i-1)/2) + 0]*2 - i%2;
+      Matrix[(I-1)] += Mlocal[(i-1)];
   }
 }
 
@@ -119,14 +132,14 @@ void make_grad_matrix(element &elem, float *B, float *B_t, float xi, float eta) 
   float dN3dxi = (1+eta) / 4, dN3deta = (1+xi) / 4;
   float dN4dxi = -(1+eta) / 4, dN4deta = (1-xi) / 4;
 
-  float dN1dx = (dN1deta*dydeta - dN1deta*dydxi) / jacobian;
-  float dN1dy = (-dN1dxi*dxdeta + dN1deta*dxdxi) / jacobian;
-  float dN2dx = (dN2deta*dydeta - dN2deta*dydxi) / jacobian;
-  float dN2dy = (-dN2dxi*dxdeta + dN2deta*dxdxi) / jacobian;
-  float dN3dx = (dN3deta*dydeta - dN3deta*dydxi) / jacobian;
-  float dN3dy = (-dN3dxi*dxdeta + dN3deta*dxdxi) / jacobian;
-  float dN4dx = (dN4deta*dydeta - dN4deta*dydxi) / jacobian;
-  float dN4dy = (-dN4dxi*dxdeta + dN4deta*dxdxi) / jacobian;
+  float dN1dx = (dN1dxi*dydeta - dN1deta*dxdeta) / jacobian; 
+  float dN1dy = (-dN1dxi*dydxi + dN1deta*dxdxi) / jacobian;
+  float dN2dx = (dN2dxi*dydeta - dN2deta*dxdeta) / jacobian;
+  float dN2dy = (-dN2dxi*dydxi + dN2deta*dxdxi) / jacobian;
+  float dN3dx = (dN3dxi*dydeta - dN3deta*dxdeta) / jacobian;
+  float dN3dy = (-dN3dxi*dydxi + dN3deta*dxdxi) / jacobian;
+  float dN4dx = (dN4dxi*dydeta - dN4deta*dxdeta) / jacobian;
+  float dN4dy = (-dN4dxi*dydxi + dN4deta*dxdxi) / jacobian;
 
   for (int i=1; i<=4; ++i) {
       B[i*2-1] = 0;
@@ -149,7 +162,7 @@ void make_grad_matrix(element &elem, float *B, float *B_t, float xi, float eta) 
 void make_D_matrix(float *D){
   // создаю D для матрицы жестоксти
   float E = 10000000;
-  float nu = 0.25;
+  float nu = 0.25;// 0.25; , 0 - чтобы были гарничные условия верны
   float tmp = E * (1-nu) / ((1+nu) * (1-2*nu));
   D[0] = tmp; D[1] = tmp * nu / (1-nu); D[2] = 0;
   D[3] = tmp * nu / (1-nu); D[4] = tmp; D[5] = 0;
@@ -157,8 +170,10 @@ void make_D_matrix(float *D){
 }
 
 void stiffness_matrix_local(element &elem, float *Klocal) {
-  std::vector<float> quad {-1, 1};
-  std::vector<float> quad_w {1, 1};
+  std::vector<float> quad;
+  quad.push_back(-1); quad.push_back(1);
+  std::vector<float> quad_w;
+  quad_w.push_back(1); quad_w.push_back(1);
   float *B = new float[24];
   float *B_t = new float[24];
   float *D = new float[9];
@@ -197,25 +212,67 @@ void stiffness_matrix_local(element &elem, float *Klocal) {
           }
       }
   }
+
+  /*for (int i=0; i<8; ++i) {
+	  for (int j=0; j<8; ++j) {
+
+		for (int k=0; k<quad.size(); ++k) {
+			for (int l=0; l<quad.size(); ++l) {
+				make_grad_matrix(elem, B, B_t, quad[k], quad[l]);
+				float jacobian = Jacobian(elem, quad[k], quad[l]);
+				
+				//if (jacobian < 0) 
+					//std::cout << elem.eid << ": " << jacobian << std::endl;
+
+				float K_tmp = 0;
+
+                  for (int m=0; m<3; ++m) {
+                      float tmp = 0;
+
+                      for (int n=0; n<3; ++n) {
+                          tmp += D[m*3+n] * B[n*8+j];
+                      }
+                      K_tmp += B_t[i*3+m] * tmp;
+                  }*/
+				  /*if (i==0 && j ==3) {
+					  for (int r=0; r<3; ++r) {
+						  for (int t=0; t<8; ++t) {
+							std::cout << B[r*8+t] << "  ";
+						  }
+						  std::cout << std::endl;
+					  }
+					  std::cout << std::endl;
+				  }*/
+                  /*K_tmp *= jacobian
+                        * quad_w[k] * quad_w[l];
+				  Klocal[i*8+j] += K_tmp;
+			}
+		}
+	  
+	  }
+  }*/
 }
 
-void force_matrix_local(element &elem, float *Flocal, float f) {
-  float ro = 1000;
+void force_matrix_local(element &elem, float *Flocal, float f, float *f_vector) {
+  float ro = 10000;
+  // dim of f_vector == 2
   // реализовать, но не понимаю как учитываается зависимость силы от времени
-  std::vector<float> quad {-1, 1};
-  std::vector<float> quad_w {1, 1};
+  std::vector<float> quad;
+  quad.push_back(-1); quad.push_back(1);
+  std::vector<float> quad_w;
+  quad_w.push_back(1); quad_w.push_back(1);
 
   for (int i=0; i<8; ++i) {
       float tmp=0;
       // квадратуры гауса
       for (int k=0; k<quad.size(); ++k) {
           for (int l=0; l<quad.size(); ++l) {
-              tmp += f * ro * basis_function(i/2, quad[k], quad[l])
+              tmp += f * basis_function(i/2, quad[k], quad[l])
                   * Jacobian(elem, quad[k], quad[l])
                   * quad_w[k] * quad_w[l];
           }
       }
-      Flocal[i] = tmp * ro;
+      Flocal[i] = tmp * ro * f_vector[int(i % 2)];
   }
 }
 

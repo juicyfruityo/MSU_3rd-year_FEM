@@ -8,7 +8,8 @@
 #include <regex>
 
 
-using node = struct node {
+// using node = 
+struct node {
   int nid;
   float x, y;
 
@@ -18,7 +19,8 @@ using node = struct node {
 
 std::vector<node> Nodes;
 
-using element = struct element {
+// using element = 
+struct element {
   int eid;
   std::vector<int> num;
   std::vector<node> _node;
@@ -48,8 +50,9 @@ int load_mesh() {
   // std::vector<node> Nodes;
   // std::vector<element> Elements;
   std::ifstream f_nodes, f_elements;
-  f_nodes.open("new_nodes_df_6x3.txt");
-  f_elements.open("new_elements_df_6x3.txt");
+  // CHANGE MESH HERE
+  f_nodes.open("nodes_df_6x6_1156.txt");
+  f_elements.open("elements_df_6x6_1156.txt");
 
   int nid, eid, n1, n2, n3, n4;
   float x, y;
@@ -68,7 +71,9 @@ int load_mesh() {
       // std::cout << nid << " " << x << " " << y << std::endl;
       prev = 0;
 
-      Nodes.emplace_back(nid, x, y);
+	  node tmp(nid, x, y);
+	  Nodes.push_back(tmp);
+      // Nodes.emplace_back(nid, x, y);
   }
 
   while (std::getline(f_elements, line)) {
@@ -90,7 +95,9 @@ int load_mesh() {
       next = line.find(',', prev);
       prev = 0;
 
-      Elements.emplace_back(eid, n1, n2, n3, n4);
+	  element tmp(eid, n1, n2, n3, n4);
+	  Elements.push_back(tmp);
+      // Elements.emplace_back(eid, n1, n2, n3, n4);
   }
 
   f_nodes.close();
